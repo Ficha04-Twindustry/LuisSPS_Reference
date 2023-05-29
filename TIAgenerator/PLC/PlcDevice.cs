@@ -119,6 +119,43 @@ namespace TIAgenerator.PLC
 
         }
 
+        public void ExportXML(string name)
+        {
+            plcDevice = projectTIA.Devices[0]; 
+        
+        foreach (DeviceItem devItem in plcDevice.DeviceItems)
+            {
+                SoftwareContainer plcSWcontainer = ((IEngineeringServiceProvider)devItem).GetService<SoftwareContainer>();
+                if (plcSWcontainer !=null)
+                {
+                    softwarePLC = (PlcSoftware)plcSWcontainer.Software;
+                }
+
+            }
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "XML|.xml";
+            saveFileDialog.FileName = name;
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                PlcBlock foundBlock = RecursiveFindPlcBlock(name, softwarePLC.BlockGroup);
+                if (foundBlock !=null)
+                {
+                    foundBlock.Export(new FileInfo(Path.GetFullPath(saveFileDialog.FileName)), ExportOptions.WithDefaults);
+                }
+
+
+            }
+
+
+
+        
+        
+        
+        
+        
+        
+        }
+
         /// <summary>
         /// Set name in PLC device properties
         /// </summary>
@@ -423,6 +460,32 @@ namespace TIAgenerator.PLC
             }
 
         }
+
+    //RecursiveFind
+    public PlcBlock RecursiveFindPlcBlock(string name, PlcBlockGroup currentFolder)
+        {
+            PlcBlock foundBlock = null;
+
+            if (currentFolder.Blocks.Find (name)!=null)
+            {
+                foundBlock = currentFolder.Blocks.Find(name);
+                return foundBlock;
+
+            }
+
+            foreach (PlcBlockGroup nextFolder in currentFolder.Groups)
+            {
+                Console.WriteLine("Recursive call for " + nextFolder.Name);
+                foundBlock=RecursiveFindPlcBlock(name, nextFolder);
+                if (foundBlock != null)
+                    break;
+            }
+
+            return foundBlock;
+        }
+
+
+
 
         /// <summary>
         /// Method to compile PLC

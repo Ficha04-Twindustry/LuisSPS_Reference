@@ -38,11 +38,11 @@
     </Reference>
     <Reference Include="Siemens.Engineering, Version=17.0.0.0, Culture=neutral, PublicKeyToken=d29ec89bac048f84, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files\Siemens\Automation\Portal V17\PublicAPI\V17\Siemens.Engineering.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Siemens\Automation\Portal V15_1\PublicAPI\V15.1\Siemens.Engineering.dll</HintPath>
     </Reference>
     <Reference Include="Siemens.Engineering.Hmi, Version=17.0.0.0, Culture=neutral, PublicKeyToken=d29ec89bac048f84, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files\Siemens\Automation\Portal V17\PublicAPI\V17\Siemens.Engineering.Hmi.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Siemens\Automation\Portal V15_1\PublicAPI\V15.1\Siemens.Engineering.Hmi.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -57,9 +57,11 @@
   <ItemGroup>
     <Compile Include="HMI\HmiDevice.cs" />
     <Compile Include="Interface\ITiaDevice.cs" />
+    <Compile Include="PLC\XML_Handling.cs" />
     <Compile Include="PLC\PlcDevice.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TIA_Portal\TIA_V15.cs" />
     <Compile Include="TIA_Portal\TIA_V17.cs" />
     <Compile Include="TreeItem\HmiFolderBlock.cs" />
   </ItemGroup>
